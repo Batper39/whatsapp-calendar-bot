@@ -10,11 +10,6 @@ require('dotenv').config();
 const SCOPES = ['https://www.googleapis.com/auth/calendar'];
 const TOKEN_PATH = path.join(__dirname, 'token.json');
 
-// Load client secrets from credentials.json
-fs.readFile(path.join(__dirname, 'credentials/credentials.json'), (err, content) => {
-  if (err) return console.error('❌ Error loading client secret file:', err);
-  authorize(JSON.parse(content), createTestEvent);
-});
 
 function authorize(credentials, callback) {
   const { client_secret, client_id, redirect_uris } = credentials.installed;
