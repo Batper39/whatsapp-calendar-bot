@@ -3,6 +3,8 @@ const path = require('path');
 const readline = require('readline');
 const { google } = require('googleapis');
 const chrono = require('chrono-node');
+const qrcode = require('qrcode-terminal'); // ✅ this line here!
+require('dotenv').config();
 
 // Load environment variables from .env (we'll use this later)
 require('dotenv').config();
