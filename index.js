@@ -10,6 +10,7 @@ require('dotenv').config();
 const SCOPES = ['https://www.googleapis.com/auth/calendar'];
 const TOKEN_PATH = path.join(__dirname, 'token.json');
 
+authorizeFromEnv(createTestEvent);
 
 function authorize(credentials, callback) {
   const { client_secret, client_id, redirect_uris } = credentials.installed;
@@ -19,6 +20,21 @@ const oAuth2Client = new google.auth.OAuth2(
   'urn:ietf:wg:oauth:2.0:oob'
 );
   // Check for existing token
+  fs.readFile(TOKEN_PATH, (err, token) => {
+    if (err) return getAccessToken(oAuth2Client, callback);
+    oAuth2Client.setCredentials(JSON.parse(token));
+    callback(oAuth2Client);
+  });
+}
+
+function authorizeFromEnv(callback) {
+  const oAuth2Client = new google.auth.OAuth2(
+    process.env.CLIENT_ID,
+    process.env.CLIENT_SECRET,
+    'urn:ietf:wg:oauth:2.0:oob'
+  );
+
+  // Load saved token.json file
   fs.readFile(TOKEN_PATH, (err, token) => {
     if (err) return getAccessToken(oAuth2Client, callback);
     oAuth2Client.setCredentials(JSON.parse(token));
