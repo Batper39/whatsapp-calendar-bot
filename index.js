@@ -102,7 +102,6 @@ function createTestEvent(auth) {
   );
 }
 const { Client, LocalAuth } = require('whatsapp-web.js');
-const qrcode = require('qrcode-terminal');
 
 // Setup WhatsApp client
 const waClient = new Client({
@@ -114,7 +113,6 @@ const waClient = new Client({
 });
 
 // Show QR code in terminal
-const qrcode = require('qrcode-terminal'); // Make sure this is at the top if not already
 
 waClient.on('qr', (qr) => {
   console.log('\n📲 Scan this QR code with WhatsApp Web:\n');
