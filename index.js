@@ -112,9 +112,11 @@ const waClient = new Client({
 });
 
 // Show QR code in terminal
+const qrcode = require('qrcode-terminal'); // Make sure this is at the top if not already
+
 waClient.on('qr', (qr) => {
   console.log('\n📲 Scan this QR code with WhatsApp Web:\n');
-  qrcode.generate(qr, { small: true });
+  qrcode.generate(qr, { small: true }); // 👈 This is the line you're asking about
 });
 
 // Confirm ready
